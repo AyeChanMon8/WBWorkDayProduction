@@ -130,6 +130,8 @@ import 'package:winbrother_hr_app/pages/profile_page.dart';
 import 'package:winbrother_hr_app/pages/purchase_order_detail.dart';
 import 'package:winbrother_hr_app/pages/purchase_order_list.dart';
 import 'package:winbrother_hr_app/pages/reminder_approve_tabbar.dart';
+import 'package:winbrother_hr_app/pages/reminders_details.dart';
+import 'package:winbrother_hr_app/pages/reminders_list.dart';
 import 'package:winbrother_hr_app/pages/request_list.dart';
 import 'package:winbrother_hr_app/pages/resignation_approval_tabar.dart';
 import 'package:winbrother_hr_app/pages/reward_approve_tabbar.dart';
@@ -441,7 +443,10 @@ class AppPages {
     GetPage(
       name: Routes.APPROVED_INSURANCE_DETAILS,
       page: () => ApprovedInsuranceDetailsPage()
-    )
+    ),
+    GetPage(name: Routes.REMINDERS_LIST, page: () => RemindersList()),
+    GetPage(
+        name: Routes.REMINDERS_DETAILS, page: () => RemindersDetails()),
 
 
   ];

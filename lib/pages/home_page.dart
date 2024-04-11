@@ -11,6 +11,7 @@ import 'package:localstorage/localstorage.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:winbrother_hr_app/controllers/announcements_controller.dart';
 import 'package:winbrother_hr_app/controllers/notification_controller.dart';
+import 'package:winbrother_hr_app/controllers/reminder_noti_controller.dart';
 import 'package:winbrother_hr_app/controllers/user_profile_controller.dart';
 import 'package:winbrother_hr_app/localization.dart';
 import 'package:winbrother_hr_app/models/home_function.dart';
@@ -42,6 +43,9 @@ class _MainState extends State<HomePage> {
   final AnnouncementsController announcementsController = Get.put(
     AnnouncementsController(),
   );
+  final ReindersNotiController remindersNotiController = Get.put(
+    ReindersNotiController(),
+  );
   @override
   void initState(){
     //TODO one signal need to test.
@@ -49,6 +53,7 @@ class _MainState extends State<HomePage> {
     initPlatformState();
     notiController.retrieveMsgs();
     announcementsController.onReady();
+    remindersNotiController.onReady();
     //_handleSetExternalUserId();
   }
 
@@ -430,6 +435,10 @@ class _MainState extends State<HomePage> {
               SizedBox(
                 height: 20,
               ),
+              remindersWidget(context),
+              SizedBox(
+                height: 20,
+              )
               // notificationWidget(context),
             ],
           ),
@@ -539,6 +548,65 @@ class _MainState extends State<HomePage> {
             );
           }
         });
+  }
+
+  Widget remindersWidget(BuildContext context) {
+    final labels = AppLocalizations.of(context);
+    final ReindersNotiController controller =
+        Get.put(ReindersNotiController());
+    return Container(
+      margin: EdgeInsets.only(left: 10, right: 10),
+      child: Card(
+        elevation: 2,
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: EdgeInsets.only(left: 10, top: 10),
+                child: Text((labels?.reminders), style: maintitleStyle()),
+              ),
+              Divider(
+                thickness: 1,
+              ),
+              Container(
+                margin: EdgeInsets.only(
+                  left: 30,
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Get.toNamed(Routes.REMINDERS_LIST);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(labels?.allReminders, style: subtitleStyle()),
+                      Row(
+                        children: [
+                          Container(
+                            child: Text(controller.unReadMsgCount.toString()
+                                .toString(),style: TextStyle(color: Colors.white),),
+                            padding: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle
+                            ),
+                          ),
+                          arrowforwardIcon
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Widget announcementsWidget(BuildContext context) {

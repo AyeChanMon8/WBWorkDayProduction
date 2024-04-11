@@ -46,8 +46,10 @@ class NotificationService extends OdooService {
 
       String datebefore = AppUtils.onemonthago();
       // String filter = "[['employee_id', '=',$partnerId],['create_date','>=','$datebefore'],['message_type','!=','announcement']]";
+      // String urlData = url +
+      //     "?filters=[['employee_id', '=',$partnerId],['create_date','>=','$datebefore']]&order=write_date desc";
       String urlData = url +
-          "?filters=[['employee_id', '=',$partnerId],['create_date','>=','$datebefore']]&order=write_date desc";
+          "?filters=[['employee_id', '=',$partnerId],['create_date','>=','$datebefore'],['message_type','!=','reminder']]&order=write_date desc";
 
       Response response =
       await dioClient.get(urlData);
@@ -79,8 +81,10 @@ class NotificationService extends OdooService {
 
       String datebefore = AppUtils.onemonthago();
      // String filter = "[['employee_id', '=',$partnerId],['create_date','>=','$datebefore'],['message_type','!=','announcement']]";
+      // String urlData = url +
+      //     "?filters=[['employee_id', '=',$partnerId],['create_date','>=','$datebefore'],['has_read','!=','t']]&order=write_date desc";
       String urlData = url +
-          "?filters=[['employee_id', '=',$partnerId],['create_date','>=','$datebefore'],['has_read','!=','t']]&order=write_date desc";
+          "?filters=[['employee_id', '=',$partnerId],['create_date','>=','$datebefore'],['has_read','!=','t'],['message_type','!=','reminder']]&order=write_date desc";
       Response response =
           await dioClient.get(urlData);
 

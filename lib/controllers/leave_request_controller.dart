@@ -251,11 +251,10 @@ class LeaveRequestController extends GetxController {
     var duration = durationController.text;
     print('request leave${durationController.text}');
     double durationValue = 0.0;
-    if (duration != null) {
+    if (duration != null && duration != "") {
       durationValue = double.parse(duration.toString());
       print("Duration Leave = $durationValue");
     }
-
     var description = descriptionController.text;
     bool valid = false;
     print("from_date");
@@ -274,6 +273,8 @@ class LeaveRequestController extends GetxController {
       } else {
         valid = true;
       }
+    }else if (leavelLineList.length ==0) {
+      AppUtils.showDialog('Information', 'Please Attach Leave Line!');
     } else if (description.isEmpty) {
       AppUtils.showDialog('Information', 'Please Fill Description!');
     } else {

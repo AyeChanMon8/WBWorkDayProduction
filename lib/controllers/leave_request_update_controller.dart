@@ -103,7 +103,8 @@ class LeaveRequestUpdateController extends GetxController {
     await leaveService.getLeaveLine(leave).then((value) {
       Get.back();
       if (value != null) {
-        if (value[0].message == null) {
+        if(value.length > 0){
+          if (value[0].message == null) {
           leavelLineList.value = value;
           var num = 0;
           double days = 0;
@@ -121,10 +122,15 @@ class LeaveRequestUpdateController extends GetxController {
           }
           durationController.text = days.toString();
           updateState();
-        } else {
+        }else {
           AppUtils.showDialog('Information', value[0].message);
           leavelLineList.clear();
         }
+        
+        } else {
+        durationController.text = '';
+        leavelLineList.clear();
+      }
       } else {
         leavelLineList.clear();
       }
@@ -187,6 +193,8 @@ class LeaveRequestUpdateController extends GetxController {
       } else {
         valid = true;
       }
+    }else if (leavelLineList.length ==0 ) {
+      AppUtils.showDialog('Information', 'Please Attach Leave Line!');
     } else if (description.isEmpty) {
       AppUtils.showDialog('Information', 'Please Fill Description!');
     } else {

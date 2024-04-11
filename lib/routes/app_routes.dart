@@ -144,4 +144,6 @@ abstract class Routes {
   static const APPROVEDMAINTENANCEDETAILPAGE = '/approved_maintenance_detail_page';
   static const INSURANCE_APPROVAL = '/insurance_approval';
   static const APPROVED_INSURANCE_DETAILS = '/approved_insurance_details';
+  static const REMINDERS_LIST = '/reminderlist';
+  static const REMINDERS_DETAILS = '/remindersdetails';
 }
