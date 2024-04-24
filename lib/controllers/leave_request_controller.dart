@@ -125,10 +125,12 @@ class LeaveRequestController extends GetxController {
           durationController.text = days.toString();
           updateState();
         } else {
+          durationController.text = "";
           AppUtils.showDialog('Information', value[0].message);
           leavelLineList.clear();
         }
       } else {
+        durationController.text = "";
         leavelLineList.clear();
       }
     });
